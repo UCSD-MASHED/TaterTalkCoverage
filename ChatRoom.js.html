@@ -490,7 +490,7 @@
 <span class="cline-any cline-yes">79x</span>
 <span class="cline-any cline-yes">79x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">79x</span>
+<span class="cline-any cline-yes">78x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -544,13 +544,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">79x</span>
-<span class="cline-any cline-yes">79x</span>
-<span class="cline-any cline-yes">153x</span>
+<span class="cline-any cline-yes">78x</span>
+<span class="cline-any cline-yes">78x</span>
+<span class="cline-any cline-yes">151x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">79x</span>
+<span class="cline-any cline-yes">78x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">79x</span>
+<span class="cline-any cline-yes">78x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -651,7 +651,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
@@ -710,7 +710,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">382x</span>
+<span class="cline-any cline-yes">381x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -742,7 +742,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">257x</span>
+<span class="cline-any cline-yes">258x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1066,52 +1066,52 @@ class ChatRoom extends React.Component {
     return this.state.loading ? (
       &lt;Loading /&gt;
     ) : (
-        &lt;div style={{ height: "100%" }}&gt;
-          &lt;nav
-            class="navbar navbar-dark bg-dark"
-            style={{ borderBottom: "1px solid #6649b8" }}
-          &gt;
-            &lt;a class="navbar-brand" href="/"&gt;
-              TaterTalk
+      &lt;div style={{ height: "100%" }}&gt;
+        &lt;nav
+          class="navbar navbar-dark bg-dark"
+          style={{ borderBottom: "1px solid #6649b8" }}
+        &gt;
+          &lt;a class="navbar-brand" href="/"&gt;
+            TaterTalk
           &lt;/a&gt;
-            &lt;LogOutButton logout={this.logout} /&gt;
-          &lt;/nav&gt;
+          &lt;LogOutButton logout={this.logout} /&gt;
+        &lt;/nav&gt;
 &nbsp;
-          &lt;div className="main"&gt;
-            &lt;People
-              user={this.state.user}
-              users={this.state.users}
-              keyword={this.state.keyword}
-              handleSearchChange={this.handleSearchChange}
-              handleChangeRoom={this.handleChangeRoom}
-              checkChatRoomExists={this.checkChatRoomExists}
-            /&gt;
-            &lt;div className="chat-wrapper"&gt;
-              &lt;div className="chat-person"&gt;
-                &lt;h3 className="truncate" data-testid="room-name"&gt;
-                  {this.state.roomName}
-                &lt;/h3&gt;
-              &lt;/div&gt;
-              &lt;div className="chat-messages"&gt;
-                {this.state.messages &amp;&amp;
-                  this.state.messages.map((msg, i) =&gt; (
-                    &lt;ChatMessage
-                      key={i}
-                      message={msg}
-                      username={this.state.user.username}
-                    /&gt;
-                  ))}
-                &lt;span ref={this.dummy}&gt;&lt;/span&gt;
-              &lt;/div&gt;
-              &lt;ChatInput
-                message={this.state.message}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-              /&gt;
+        &lt;div className="main"&gt;
+          &lt;People
+            user={this.state.user}
+            users={this.state.users}
+            keyword={this.state.keyword}
+            handleSearchChange={this.handleSearchChange}
+            handleChangeRoom={this.handleChangeRoom}
+            checkChatRoomExists={this.checkChatRoomExists}
+          /&gt;
+          &lt;div className="chat-wrapper"&gt;
+            &lt;div className="chat-person"&gt;
+              &lt;h3 className="truncate" data-testid="room-name"&gt;
+                {this.state.roomName}
+              &lt;/h3&gt;
             &lt;/div&gt;
+            &lt;div className="chat-messages"&gt;
+              {this.state.messages &amp;&amp;
+                this.state.messages.map((msg, i) =&gt; (
+                  &lt;ChatMessage
+                    key={i}
+                    message={msg}
+                    username={this.state.user.username}
+                  /&gt;
+                ))}
+              &lt;span ref={this.dummy}&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;ChatInput
+              message={this.state.message}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+            /&gt;
           &lt;/div&gt;
         &lt;/div&gt;
-      );
+      &lt;/div&gt;
+    );
   }
 }
 &nbsp;
@@ -1123,7 +1123,7 @@ export default withRouter(ChatRoom);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Dec 12 2020 09:45:15 GMT+0000 (Coordinated Universal Time)
+                at Sat Dec 12 2020 09:46:44 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
