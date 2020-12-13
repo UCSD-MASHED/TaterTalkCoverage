@@ -397,7 +397,18 @@
 <a name='L338'></a><a href='#L338'>338</a>
 <a name='L339'></a><a href='#L339'>339</a>
 <a name='L340'></a><a href='#L340'>340</a>
-<a name='L341'></a><a href='#L341'>341</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L341'></a><a href='#L341'>341</a>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a>
+<a name='L344'></a><a href='#L344'>344</a>
+<a name='L345'></a><a href='#L345'>345</a>
+<a name='L346'></a><a href='#L346'>346</a>
+<a name='L347'></a><a href='#L347'>347</a>
+<a name='L348'></a><a href='#L348'>348</a>
+<a name='L349'></a><a href='#L349'>349</a>
+<a name='L350'></a><a href='#L350'>350</a>
+<a name='L351'></a><a href='#L351'>351</a>
+<a name='L352'></a><a href='#L352'>352</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -638,7 +649,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
@@ -717,7 +728,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">256x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">257x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1040,36 +1062,47 @@ class ChatRoom extends React.Component {
     return this.state.loading ? (
       &lt;Loading /&gt;
     ) : (
-      &lt;div className="main"&gt;
-        &lt;People
-          user={this.state.user}
-          users={this.state.users}
-          keyword={this.state.keyword}
-          handleSearchChange={this.handleSearchChange}
-          handleChangeRoom={this.handleChangeRoom}
-          checkChatRoomExists={this.checkChatRoomExists}
-        /&gt;
-        &lt;div className="chat-wrapper"&gt;
-          &lt;LogOutButton logout={this.logout} /&gt;
-          &lt;h3 className="truncate" data-testid="room-name"&gt;
-            {this.state.roomName}
-          &lt;/h3&gt;
-          &lt;div className="chat-messages"&gt;
-            {this.state.messages &amp;&amp;
-              this.state.messages.map((msg, i) =&gt; (
-                &lt;ChatMessage
-                  key={i}
-                  message={msg}
-                  username={this.state.user.username}
-                /&gt;
-              ))}
-            &lt;span ref={this.dummy}&gt;&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;ChatInput
-            message={this.state.message}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
+      &lt;div style={{ height: "100%" }}&gt;
+        &lt;div className="chat-header"&gt;
+          &lt;span className="chat-title"&gt;
+            TaterTalk
+            &lt;span className="logout-btn"&gt;
+              &lt;LogOutButton logout={this.logout} /&gt;
+            &lt;/span&gt;
+          &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div className="main"&gt;
+          &lt;People
+            user={this.state.user}
+            users={this.state.users}
+            keyword={this.state.keyword}
+            handleSearchChange={this.handleSearchChange}
+            handleChangeRoom={this.handleChangeRoom}
+            checkChatRoomExists={this.checkChatRoomExists}
           /&gt;
+          &lt;div className="chat-wrapper"&gt;
+            &lt;div className="chat-person"&gt;
+              &lt;h3 className="truncate" data-testid="room-name"&gt;
+                {this.state.roomName}
+              &lt;/h3&gt;
+            &lt;/div&gt;
+            &lt;div className="chat-messages"&gt;
+              {this.state.messages &amp;&amp;
+                this.state.messages.map((msg, i) =&gt; (
+                  &lt;ChatMessage
+                    key={i}
+                    message={msg}
+                    username={this.state.user.username}
+                  /&gt;
+                ))}
+              &lt;span ref={this.dummy}&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;ChatInput
+              message={this.state.message}
+              handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+            /&gt;
+          &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     );
@@ -1084,7 +1117,7 @@ export default withRouter(ChatRoom);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Dec 13 2020 05:25:18 GMT+0000 (Coordinated Universal Time)
+                at Sun Dec 13 2020 05:50:42 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
