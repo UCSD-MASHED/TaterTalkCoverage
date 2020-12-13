@@ -228,7 +228,8 @@
 <a name='L169'></a><a href='#L169'>169</a>
 <a name='L170'></a><a href='#L170'>170</a>
 <a name='L171'></a><a href='#L171'>171</a>
-<a name='L172'></a><a href='#L172'>172</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -262,6 +263,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -312,32 +324,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -365,6 +351,22 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -436,7 +438,18 @@ class CreateUser extends React.Component {
   }
 &nbsp;
   /**
+   * Go back to sign-in page if not signed in
+   * (This can happen when the user types in the URL (/createUser) directly)
+   */
+  componentDidMount() {
+    if (!this.state.googleUser) {
+      this.props.history.replace("/");
+    }
+  }
+&nbsp;
+  /**
    * Handles username input change, update state accordingly.
+   * @param {Object} event - an Event object
    */
   handleChange(event) {
     this.setState({ username: event.target.value });
@@ -447,7 +460,7 @@ class CreateUser extends React.Component {
    * is unique, if it is, it will then create the user in firestore with
    * the username and display a toast and redirect to Chat,
    * else it will display an error toast and remain in the page.
-   * @param {Object} event - An Event Object
+   * @param {Object} event - an Event object
    */
   handleSubmit(event) {
     event.preventDefault();
@@ -479,39 +492,13 @@ class CreateUser extends React.Component {
   }
 &nbsp;
   /**
-   * Go back to sign-in page if not signed in
-   * (This can happen when the user types in the URL (/createUser) directly)
-   */
-  componentDidMount() {
-    if (!this.state.googleUser) {
-      this.props.history.replace("/");
-    }
-  }
-&nbsp;
-  /**
-   * Check if the current username is unique in database
-   * @param {string} username - The username to be checked in database
-   * @return {boolean} True if username is unique; otherwise False
-   */
-  async usernameIsUnique(username) {
-    var res = await firebase
-      .firestore()
-      .collection("users")
-      .where("username", "==", username)
-      .limit(1)
-      .get()
-      .then((querySnapshot) =&gt; querySnapshot.empty);
-    return res;
-  }
-&nbsp;
-  /**
    * Create a user in database
-   * @param {Object} googleUser - The google user to be found in database
-   * @param {string} googleUser.uid - The unique id of the google user
-   * @param {string} googleUser.displayName - The displayed name of the
+   * @param {Object} googleUser - google user to be found in database
+   * @param {string} googleUser.uid - unique id of the google user
+   * @param {string} googleUser.displayName - displayed name of the
    *     google user
-   * @param {string} username - The username of the user
-   * @return {user|null} The newly created user if created successfully;
+   * @param {string} username - username of the user
+   * @return {user|null} newly created user if created successfully;
    *     otherwise null
    */
   async createUser(googleUser, username) {
@@ -536,6 +523,22 @@ class CreateUser extends React.Component {
 <span class="cstat-no" title="statement not covered" >        console.log("An error occurs", err);</span>
 <span class="cstat-no" title="statement not covered" >        return null;</span>
       });
+    return res;
+  }
+&nbsp;
+  /**
+   * Check if the current username is unique in database
+   * @param {string} username - the username to be checked in database
+   * @return {boolean} true if username is unique; otherwise False
+   */
+  async usernameIsUnique(username) {
+    var res = await firebase
+      .firestore()
+      .collection("users")
+      .where("username", "==", username)
+      .limit(1)
+      .get()
+      .then((querySnapshot) =&gt; querySnapshot.empty);
     return res;
   }
 &nbsp;
@@ -577,7 +580,7 @@ export default withRouter(CreateUser);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Dec 13 2020 01:00:53 GMT+0000 (Coordinated Universal Time)
+                at Sun Dec 13 2020 01:02:26 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
