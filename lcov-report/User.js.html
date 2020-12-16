@@ -166,7 +166,11 @@
 <a name='L107'></a><a href='#L107'>107</a>
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,6 +197,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -225,31 +248,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3715x</span>
+<span class="cline-any cline-yes">3911x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -280,7 +284,9 @@ import { withRouter } from "react-router-dom";
 import firebase from "firebase/app";
 &nbsp;
 /**
- * This is the User Component
+ * This is the User Component used to handle the user actions in the user list
+ * such as starting a chat with another user.
+ * @hideconstructor
  */
 class User extends React.Component {
   constructor(props) {
@@ -290,8 +296,8 @@ class User extends React.Component {
 &nbsp;
   /**
    * Create a new chat room for participants
-   * @param {string[]} participants - list of usernames for users in the room
-   * @return {string} roomId - id of the newly created chat room
+   * @param {string[]} participants - list of usernames for [users]{@link _User} in a [room]{@link _Room}
+   * @return {string} id of the newly created chat [room]{@link _Room}
    */
   async createRoom(participants) {
     let roomId = await firebase
@@ -302,12 +308,31 @@ class User extends React.Component {
       })
       .then((roomRef) =&gt; roomRef.id);
     return roomId;
-  }
+  } /* createRoom */
 &nbsp;
   /**
-   * Set the roomId to the lists of each user in this room
-   * @param {string} roomId - id of the chat room
-   * @param {string[]} participants - list of usernames for users in the room
+   * Find and open a chat room containing the list of participants
+   * given. If no chat room exists, create a new chat room with these
+   * participants. Will call the parent handler to switch to the found
+   * chat room.
+   * @param {string[]} participants - list of usernames for [users]{@link _User} in a [room]{@link _Room}
+   */
+  async openChatRoom(participants) {
+    let chatRoomId = await this.props.checkChatRoomExists(participants);
+    if (!chatRoomId) {
+      const roomId = await this.createRoom(participants);
+      await this.setRoomId(participants, roomId);
+      // get the new chat room id
+      chatRoomId = roomId;
+    }
+    // bind enterRoom parameters
+    this.props.enterRoom(chatRoomId, this.props.targetUser.displayName);
+  } /* openChatRoom */
+&nbsp;
+  /**
+   * Set the roomId to the lists of each user in this chat room
+   * @param {string} roomId - id of the [room]{@link _Room}
+   * @param {string[]} participants - list of usernames for [users]{@link _User} in the [room]{@link _Room}
    */
   async setRoomId(participants, roomId) {
     await firebase
@@ -326,36 +351,17 @@ class User extends React.Component {
             });
         });
       });
-  }
+  } /* setRoomId */
 &nbsp;
   /**
-   * Find and open a chat room containing the list of participants
-   * given. If no chat room exists, create a new chat room with these
-   * participants. Will call the parent handler to switch to the found
-   * chat room.
-   * @param {string[]} participants - list of usernames for users in the room
-   */
-  async openChatRoom(participants) {
-    let chatRoomId = await this.props.checkChatRoomExists(participants);
-    if (!chatRoomId) {
-      const roomId = await this.createRoom(participants);
-      await this.setRoomId(participants, roomId);
-      // get the new chat room id
-      chatRoomId = roomId;
-    }
-    // bind handleChangeRoom parameters
-    this.props.handleChangeRoom(chatRoomId, this.props.targetUser);
-  }
-&nbsp;
-  /**
-   * Open a chat room given a list of participants
-   * @param {string[]} targetUsername - username of the target user
-   * @param {string[]} username - username of the current user
+   * Open a chat room given two participants
+   * @param {string} targetUsername - username of the target [user]{@link _User}
+   * @param {string} username - username of the current [user]{@link _User}
    */
   startPrivateChat(targetUsername, username) {
     let participants = [targetUsername, username].sort();
     this.openChatRoom(participants);
-  }
+  } /* startPrivateChat */
 &nbsp;
   render() {
     return (
@@ -391,7 +397,7 @@ export default withRouter(User);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Dec 16 2020 13:24:37 GMT+0000 (Coordinated Universal Time)
+                at Wed Dec 16 2020 22:34:46 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
