@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">94.68% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>88/92</span>
+                <span class='fraction'>89/94</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.65% </span>
+                <span class="strong">78.79% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>25/31</span>
+                <span class='fraction'>26/33</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.65% </span>
+                <span class="strong">94.68% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>88/92</span>
+                <span class='fraction'>89/94</span>
             </div>
         
             
@@ -438,7 +438,11 @@
 <a name='L379'></a><a href='#L379'>379</a>
 <a name='L380'></a><a href='#L380'>380</a>
 <a name='L381'></a><a href='#L381'>381</a>
-<a name='L382'></a><a href='#L382'>382</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -473,6 +477,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
@@ -490,6 +495,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -528,7 +536,7 @@
 <span class="cline-any cline-yes">79x</span>
 <span class="cline-any cline-yes">79x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">79x</span>
+<span class="cline-any cline-yes">78x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -695,13 +703,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">79x</span>
-<span class="cline-any cline-yes">79x</span>
-<span class="cline-any cline-yes">173x</span>
+<span class="cline-any cline-yes">78x</span>
+<span class="cline-any cline-yes">78x</span>
+<span class="cline-any cline-yes">171x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">79x</span>
+<span class="cline-any cline-yes">78x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">79x</span>
+<span class="cline-any cline-yes">78x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -754,9 +762,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">310x</span>
+<span class="cline-any cline-yes">309x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">310x</span>
+<span class="cline-any cline-yes">309x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -853,6 +861,7 @@ class ChatRoom extends React.Component {
       roomName: "Chat Room",
       roomId: null,
       loading: true,
+      listener: null,
     };
     this.dummy = createRef();
     this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -872,6 +881,9 @@ class ChatRoom extends React.Component {
    * not accept messages.
    */
   async componentDidMount() {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.state.listener) {
+<span class="cstat-no" title="statement not covered" >      this.state.listener();</span>
+    }
     if (!this.state.user) {
       this.props.history.replace("/");
     } else {
@@ -1019,7 +1031,7 @@ class ChatRoom extends React.Component {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (!roomId) {
 <span class="cstat-no" title="statement not covered" >      return;</span>
     }
-    await firebase
+    this.state.listener = await firebase
       .firestore()
       .collection("rooms")
       .doc(roomId)
@@ -1140,62 +1152,62 @@ class ChatRoom extends React.Component {
     return this.state.loading ? (
       &lt;Loading /&gt;
     ) : (
-      &lt;div style={{ height: "100%" }}&gt;
-        &lt;div className="chat-header"&gt;
-          &lt;span className="chat-title"&gt;
-            &lt;img
-              className="tatertalk-chatroom"
-              alt="icon"
-              src={process.env.PUBLIC_URL + "/tatertalk_icon.png"}
-            /&gt;
-            &lt;span&gt;TaterTalk&lt;/span&gt;
-            &lt;span className="logout-btn"&gt;
-              &lt;LogOutButton logout={this.logout} /&gt;
+        &lt;div style={{ height: "100%" }}&gt;
+          &lt;div className="chat-header"&gt;
+            &lt;span className="chat-title"&gt;
+              &lt;img
+                className="tatertalk-chatroom"
+                alt="icon"
+                src={process.env.PUBLIC_URL + "/tatertalk_icon.png"}
+              /&gt;
+              &lt;span&gt;TaterTalk&lt;/span&gt;
+              &lt;span className="logout-btn"&gt;
+                &lt;LogOutButton logout={this.logout} /&gt;
+              &lt;/span&gt;
             &lt;/span&gt;
-          &lt;/span&gt;
-        &lt;/div&gt;
-        &lt;div className="main"&gt;
-          &lt;People
-            keyword={this.state.keyword}
-            user={this.state.user}
-            users={this.state.users}
-            enterRoom={this.enterRoom}
-            handleChangeSearch={this.handleChangeSearch}
-            checkChatRoomExists={this.checkChatRoomExists}
-          /&gt;
-          &lt;div className="chat-wrapper"&gt;
-            &lt;div className="chat-person"&gt;
-              &lt;h3 className="truncate" data-testid="room-name"&gt;
-                {this.state.roomName}
-              &lt;/h3&gt;
-            &lt;/div&gt;
-            &lt;div className="chat-messages"&gt;
-              {roomIsEmpty ? (
-                &lt;div className="empty-chatroom"&gt;
-                  &lt;h2&gt; Don't be a couch potato... &lt;/h2&gt;
-                  &lt;h2&gt; Click on a user to start a tateriffic talk! &lt;/h2&gt;
-                &lt;/div&gt;
-              ) : (
-                this.state.messages.map((msg, i) =&gt; (
-                  &lt;ChatMessage
-                    key={i}
-                    message={msg}
-                    username={this.state.user.username}
-                  /&gt;
-                ))
-              )}
-              &lt;span ref={this.dummy}&gt;&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;ChatInput
-              disable={roomIsEmpty}
-              message={this.state.message}
-              handleChange={this.handleChangeInput}
-              handleSubmit={this.handleSubmit}
+          &lt;/div&gt;
+          &lt;div className="main"&gt;
+            &lt;People
+              keyword={this.state.keyword}
+              user={this.state.user}
+              users={this.state.users}
+              enterRoom={this.enterRoom}
+              handleChangeSearch={this.handleChangeSearch}
+              checkChatRoomExists={this.checkChatRoomExists}
             /&gt;
+            &lt;div className="chat-wrapper"&gt;
+              &lt;div className="chat-person"&gt;
+                &lt;h3 className="truncate" data-testid="room-name"&gt;
+                  {this.state.roomName}
+                &lt;/h3&gt;
+              &lt;/div&gt;
+              &lt;div className="chat-messages"&gt;
+                {roomIsEmpty ? (
+                  &lt;div className="empty-chatroom"&gt;
+                    &lt;h2&gt; Don't be a couch potato... &lt;/h2&gt;
+                    &lt;h2&gt; Click on a user to start a tateriffic talk! &lt;/h2&gt;
+                  &lt;/div&gt;
+                ) : (
+                    this.state.messages.map((msg, i) =&gt; (
+                      &lt;ChatMessage
+                        key={i}
+                        message={msg}
+                        username={this.state.user.username}
+                      /&gt;
+                    ))
+                  )}
+                &lt;span ref={this.dummy}&gt;&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;ChatInput
+                disable={roomIsEmpty}
+                message={this.state.message}
+                handleChange={this.handleChangeInput}
+                handleSubmit={this.handleSubmit}
+              /&gt;
+            &lt;/div&gt;
           &lt;/div&gt;
         &lt;/div&gt;
-      &lt;/div&gt;
-    );
+      );
   }
 }
 &nbsp;
@@ -1207,7 +1219,7 @@ export default withRouter(ChatRoom);
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Dec 18 2020 08:48:57 GMT+0000 (Coordinated Universal Time)
+                at Fri Dec 18 2020 16:52:46 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
